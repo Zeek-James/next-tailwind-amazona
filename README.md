@@ -14,3 +14,7 @@ Description
    3. add main section
    4. add folder
    5. add tailwind classes
+6. List Products
+   1. add data.js
+   2. add images
+   3. render products
