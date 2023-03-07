@@ -1,5 +1,4 @@
-import { Layout } from "@/components";
-import ProductItem from "@/components/ProductItem";
+import { Layout, ProductItem } from "@/components";
 import data from "@/utils/data";
 
 export default function Home() {

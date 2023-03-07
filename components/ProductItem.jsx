@@ -7,7 +7,7 @@ const ProductItem = ({ product }) => {
     <div className="card">
       <Link href={`/product/${product.slug}`} className="rounded shadow">
         <Image
-          src={`${product.image}`}
+          src={product.image}
           alt={product.name}
           width={900}
           height={200}
