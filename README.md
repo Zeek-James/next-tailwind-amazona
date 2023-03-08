@@ -102,6 +102,13 @@ Description
     2. save payment method in context
 
 18. Seed Sample Products
+
     1. insert sample products to mongoDB
     2. load products from db in home and product screen
     3. check product count in stock in add to cart
+
+19. Load Products From MongoDB
+    1. load products in home page from mongoDB
+    2. load products in product page from mongoDB
+    3. use product api to check count in stock in add to cart
+    4. install axios

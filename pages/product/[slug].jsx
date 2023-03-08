@@ -1,29 +1,42 @@
 import { Layout } from "@/components";
-import data from "@/utils/data";
+import Product from "@/models/Product";
+// import data from "@/utils/data";
+import db from "@/utils/db";
 import { Store } from "@/utils/Store";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
+import { toast } from "react-toastify";
 
-const ProductScreen = () => {
+const ProductScreen = ({ product }) => {
   const { state, dispatch } = useContext(Store);
 
   const router = useRouter();
 
-  const { query } = useRouter();
-  const { slug } = query;
+  // const { query } = useRouter();
+  // const { slug } = query;
 
-  const product = data.products.find((x) => x.slug === slug);
+  // const product = data.products.find((x) => x.slug === slug);
 
-  if (!product) return <div className=""> Product Not Found</div>;
+  if (!product)
+    return (
+      <Layout title={"Product Not Found"} className="">
+        {" "}
+        Product Not Found
+      </Layout>
+    );
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
-    if (product.countInStock < quantity) {
-      alert("Sorry. Product is out of stock");
+    // Check Stock Inventory
+    const { data } = await axios.get(`/api/products/${product._id}`);
+
+    if (data.countInStock < quantity) {
+      toast.error("Sorry. Product is out of stock");
       return;
     }
 
@@ -85,3 +98,18 @@ const ProductScreen = () => {
 };
 
 export default ProductScreen;
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { slug } = params;
+
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  await db.disconnect();
+
+  return {
+    props: {
+      product: product ? db.convertDocToObj(product) : null,
+    },
+  };
+}
