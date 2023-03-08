@@ -1,25 +1,25 @@
 import { Layout } from "@/components";
 import { getError } from "@/utils/error";
 import Link from "next/link";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react";
-import { useSessionHook } from "@/hooks";
+import React, { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function LoginScreen() {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
+  console.log(session?.user);
 
-  // const router = useRouter();
-  // const { redirect } = router.query;
+  const router = useRouter();
+  const { redirect } = router.query;
 
-  // useEffect(() => {
-  //   if (session?.user) {
-  //     router.push(redirect || "/");
-  //   }
-  // }, [router, session, redirect]);
-
-  useSessionHook("/");
+  useEffect(() => {
+    if (session?.user) {
+      router.push(redirect || "/");
+    }
+  }, [router, session, redirect]);
 
   const {
     handleSubmit,
@@ -33,6 +33,7 @@ export default function LoginScreen() {
         email,
         password,
       });
+
       if (result.error) {
         toast.error(result.error);
       }
