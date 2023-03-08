@@ -10,6 +10,7 @@ export default function LoginScreen() {
     formState: { errors },
   } = useForm();
   const submitHandler = async ({ email, password }) => {
+    console.log(email, password);
     //    try {
     //      const result = await signIn("credentials", {
     //        redirect: false,
