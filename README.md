@@ -158,3 +158,8 @@ Description
     1. create profile screen
     2. show user info
     3. handle update user infor
+
+27. Create Search Page
+    1. create filters
+    2. list products
+    3. show filters

@@ -3,11 +3,13 @@ import { Store } from "@/utils/Store";
 import Head from "next/head";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Menu } from "@headlessui/react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import { SearchIcon } from "@heroicons/react/outline";
 
 const Layout = ({ children, title }) => {
   const { status, data: session } = useSession();
@@ -21,6 +23,15 @@ const Layout = ({ children, title }) => {
     dispatch({ type: "CART_RESET" });
     signOut({ callbackUrl: "/login" });
   };
+
+  const [query, setQuery] = useState("");
+
+  const router = useRouter();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    router.push(`/search?query=${query}`);
+  };
+
   return (
     <>
       <Head>
@@ -36,7 +47,25 @@ const Layout = ({ children, title }) => {
             <Link href="/" className="text-lg font-bold">
               amazona
             </Link>
-            <div className="">
+            <form
+              onSubmit={submitHandler}
+              className="mx-auto  hidden w-full justify-center md:flex"
+            >
+              <input
+                onChange={(e) => setQuery(e.target.value)}
+                type="text"
+                className="rounded-tr-none rounded-br-none p-1 text-sm   focus:ring-0"
+                placeholder="Search products"
+              />
+              <button
+                className="rounded rounded-tl-none rounded-bl-none bg-amber-300 p-1 text-sm dark:text-black"
+                type="submit"
+                id="button-addon2"
+              >
+                <SearchIcon className="h-5 w-5"></SearchIcon>
+              </button>
+            </form>
+            <div className="flex items-center">
               <Link href={"/cart"} className={"p-2"}>
                 Cart
                 {cartItemCount > 0 && (
@@ -49,8 +78,8 @@ const Layout = ({ children, title }) => {
                 "Loading"
               ) : session?.user ? (
                 <Menu as="div" className="relative inline-block">
-                  <Menu.Button className={"text-blue-600"}>
-                    {session.user.name}{" "}
+                  <Menu.Button className={"text-blue-600 whitespace-nowrap"}>
+                    {session.user.name}
                   </Menu.Button>
                   <Menu.Items
                     className={
