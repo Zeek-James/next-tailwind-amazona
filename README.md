@@ -108,7 +108,15 @@ Description
     3. check product count in stock in add to cart
 
 19. Load Products From MongoDB
+
     1. load products in home page from mongoDB
     2. load products in product page from mongoDB
     3. use product api to check count in stock in add to cart
     4. install axios
+
+20. Create Place Order Screen
+
+    1. display shipping address
+    2. display payment method
+    3. display order items
+    4. implement create order
