@@ -178,6 +178,13 @@ Description
     3. Implement admin summary api
 
 30. List Orders For Admin
+
     1. create orders page
     2. create orders api
     3. use api in page
+
+31. Deliver Order For Admin
+
+    1. create deliver api
+    2. add deliver button
+    3. implement click handler
