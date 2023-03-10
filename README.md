@@ -207,3 +207,9 @@ Description
     2. get cloudinary keys
     3. create upload api
     4. upload files in edit page
+
+35. List Users For Admin
+
+    1. create users page
+    2. create users api
+    3. use api in page

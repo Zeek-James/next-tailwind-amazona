@@ -11,7 +11,7 @@ const ProductItem = ({ product, addToCartHandler }) => {
           alt={product.name}
           width={900}
           height={200}
-          className="rounded shadow"
+          className="rounded shadow object-cover w-full"
         />
       </Link>
       <div className="flex flex-col items-center justify-center p-5">
