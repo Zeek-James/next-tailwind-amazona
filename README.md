@@ -166,6 +166,13 @@ Description
     3. show filters
 
 28. Add Carousel
+
     1. create featured products
     2. feed carousel data
     3. show popular products
+
+29. Create Admin Dashboard
+
+    1. Create Admin Menu
+    2. create dashboard screen
+    3. Implement admin summary api
