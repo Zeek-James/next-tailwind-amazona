@@ -102,7 +102,7 @@ export default function AdminOrderScreen() {
                       </td>
                       <td className="p-5">
                         <Link href={`/order/${order._id}`} passHref>
-                          <a>Details</a>
+                          Details
                         </Link>
                       </td>
                     </tr>

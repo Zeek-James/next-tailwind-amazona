@@ -79,6 +79,7 @@ export default function AdminProdcutsScreen() {
   }, [successDelete]);
 
   const deleteHandler = async (productId) => {
+    console.log(productId);
     if (!window.confirm("Are you sure?")) {
       return;
     }
